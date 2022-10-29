@@ -17,11 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Execute controller specs
+      - name: Execute specs
         run: echo "now running tests"
 
       - name: Execute controller specs
-        if:  ${{ matrix.tests == 'controller' }}
+        if:  ${{ matrix.tests == 'controllers' }}
         run: echo "now running tests for ${{ matrix.tests }}"
 
       - name: Execute service specs
