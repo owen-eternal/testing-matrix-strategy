@@ -9,13 +9,25 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
+  test-specs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        tests: [controllers, services, everything-else, brakeman, jest]
+        tests: [controllers, services, everything-else]
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run a matrix build
+      - name: Execute controller specs
+        run: echo "now running tests"
+
+      - name: Execute controller specs
+        if:  ${{ matrix.tests == 'controller' }}
+        run: echo "now running tests for ${{ matrix.tests }}"
+
+      - name: Execute service specs
+        if:  ${{ matrix.tests == 'services' }}
+        run: echo "now running tests for ${{ matrix.tests }}"
+
+      - name: Execute specs for everything else
+        if:  ${{ matrix.tests == 'everything-else' }}
         run: echo "now running tests for ${{ matrix.tests }}"
